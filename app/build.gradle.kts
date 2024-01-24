@@ -71,7 +71,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-test-manifest")
 
     implementation("io.coil-kt:coil-compose:2.4.0") // coil
-    implementation("com.google.accompanist:accompanist-permissions:1.6.0") // 권한
+    implementation("com.google.accompanist:accompanist-permissions:0.28.0") // 권한
     implementation("androidx.security:security-crypto-ktx:1.1.0-alpha03") // encrypt shared preference
 
 
