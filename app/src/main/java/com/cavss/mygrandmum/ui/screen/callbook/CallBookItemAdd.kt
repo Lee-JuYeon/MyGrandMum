@@ -64,6 +64,8 @@ fun CallBookItemAdd (){
             )
             .singlePhotoPickingFromGallery { selectedUri : Uri? ->
                 photoUri = selectedUri
+                // 권한체크
+                // db에 model insert
             },
     ) {
         Image(

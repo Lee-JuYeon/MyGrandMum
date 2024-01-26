@@ -4,6 +4,7 @@ import android.view.WindowMetrics
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -53,6 +54,9 @@ fun CallBookItem (model : CallBookModel){
                 Color.White,
                 RoundedCornerShape(CornerSize(10.dp))
             )
+            .clickable {
+                // 전화연결
+            }
     ) {
         Image(
             painter = painterResource(id = R.drawable.ic_launcher_background),
