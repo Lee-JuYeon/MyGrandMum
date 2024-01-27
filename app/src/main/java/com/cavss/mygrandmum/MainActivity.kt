@@ -1,6 +1,7 @@
 package com.cavss.mygrandmum
 
 import android.os.Bundle
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.clickable
@@ -17,6 +18,7 @@ import com.cavss.mygrandmum.ui.screen.callbook.CallBookView
 import com.cavss.mygrandmum.ui.screen.cardgame.CardGameView
 import com.cavss.mygrandmum.ui.screen.map.MapView
 import com.cavss.mygrandmum.ui.theme.MygrandmumTheme
+import com.cavss.mygrandmum.util.secure.AESHelper
 
 class MainActivity : ComponentActivity() {
     val callBookList = mutableListOf<CallBookModel>(
@@ -29,6 +31,12 @@ class MainActivity : ComponentActivity() {
         CallBookModel(id = 7, name = "이용빈", relation = "사위", imagePath = "drawable/photo_youngbin", digit = "01047663616")
     )
     override fun onCreate(savedInstanceState: Bundle?) {
+        App.INSTANCE
+        val encryptText = AESHelper.encrypt("암호화 할 텍스트".toByteArray(Charsets.UTF_8))
+        val decryptText = String(AESHelper.decrypt(encryptText)!!, Charsets.UTF_8)
+        Log.e("mDebug", "암호화 된 텍스트 : ${encryptText}")
+        Log.e("mDebug", "복호화 된 텍스트 : ${decryptText}")
+
         super.onCreate(savedInstanceState)
         setContent {
             val navController: NavHostController = rememberNavController()
