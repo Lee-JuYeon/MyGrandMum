@@ -20,13 +20,13 @@ import com.cavss.mygrandmum.ui.theme.MygrandmumTheme
 
 class MainActivity : ComponentActivity() {
     val callBookList = mutableListOf<CallBookModel>(
-        CallBookModel(id = 0, name = "이주연", relation = "손자", imagePath = ""),
-        CallBookModel(id = 1, name = "장태옥", relation = "딸", imagePath = ""),
-        CallBookModel(id = 2, name = "장리디아", relation = "손녀", imagePath = ""),
-        CallBookModel(id = 3, name = "장경수", relation = "손자", imagePath = ""),
-        CallBookModel(id = 4, name = "이우연", relation = "손자", imagePath = ""),
-        CallBookModel(id = 5, name = "이찬연", relation = "손자", imagePath = ""),
-        CallBookModel(id = 6, name = "이용빈", relation = "사위", imagePath = ""),
+        CallBookModel(id = 1, name = "장태옥", relation = "딸", imagePath = "drawable/photo_taeok", digit = "01073723616"),
+        CallBookModel(id = 3, name = "장리디아", relation = "손녀", imagePath = "drawable/photo_lydia", digit = "01075203616"),
+        CallBookModel(id = 4, name = "이주연", relation = "손자", imagePath = "drawable/photo_juyeon", digit = "01073077896"),
+        CallBookModel(id = 5, name = "이우연", relation = "손자", imagePath = "drawable/photo_yooyeon", digit = "01055123616"),
+        CallBookModel(id = 6, name = "이찬연", relation = "손자", imagePath = "drawable/photo_chanyeon", digit = "01055323616"),
+        CallBookModel(id = 2, name = "장경수", relation = "손자", imagePath = "drawable/photo_kyoungsu", digit = "01085091418"),
+        CallBookModel(id = 7, name = "이용빈", relation = "사위", imagePath = "drawable/photo_youngbin", digit = "01047663616")
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

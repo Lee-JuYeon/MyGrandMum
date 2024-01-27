@@ -38,13 +38,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import com.cavss.mygrandmum.R
+import com.cavss.mygrandmum.db.sharedpreference.EncryptSharedPrefences
 import com.cavss.mygrandmum.ui.custom.imagepicker.singlePhotoPickingFromGallery
 
 @Composable
 fun CallBookItemAdd (){
+    val context = LocalContext.current
+
     var photoUri by remember {
         mutableStateOf<Uri?>(null)
     }
+
 
     Box(
         modifier = Modifier
@@ -64,8 +68,10 @@ fun CallBookItemAdd (){
             )
             .singlePhotoPickingFromGallery { selectedUri : Uri? ->
                 photoUri = selectedUri
-                // 권한체크
                 // db에 model insert
+                val encryptSharedPrefences = EncryptSharedPrefences()
+//                encryptSharedPrefences.setContext(context = context)
+//                encryptSharedPrefences.createData("")
             },
     ) {
         Image(

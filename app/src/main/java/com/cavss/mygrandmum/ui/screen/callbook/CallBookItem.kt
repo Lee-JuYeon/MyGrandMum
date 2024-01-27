@@ -1,5 +1,8 @@
 package com.cavss.mygrandmum.ui.screen.callbook
 
+import android.content.Intent
+import android.net.Uri
+import android.util.Log
 import android.view.WindowMetrics
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -32,39 +35,50 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.ContextCompat.startActivity
+import androidx.core.net.toUri
+import coil.compose.AsyncImage
+import coil.compose.AsyncImagePainter.State.Empty.painter
+import coil.compose.rememberImagePainter
 import com.cavss.mygrandmum.R
 import com.cavss.mygrandmum.ui.custom.outlinetext.OutlineText
+import com.cavss.mygrandmum.ui.custom.permission.phoneCall
+import com.cavss.mygrandmum.util.dialConverter.DialConverter
+import com.cavss.mygrandmum.util.dialConverter.DialConverter.toPhoneNumber
 
 @Composable
 fun CallBookItem (model : CallBookModel){
     val context = LocalContext.current
+
     Box(
         modifier = Modifier
             .fillMaxWidth()
             .padding(10.dp)
-            .border(
-                width = 5.dp,
-                color = Color.Yellow,
-                shape = RoundedCornerShape(
-                    CornerSize(10.dp)
-                )
-            )
             .requiredHeight(200.dp)
             .background(
-                Color.White,
+                Color.Transparent,
                 RoundedCornerShape(CornerSize(10.dp))
             )
-            .clickable {
-                // 전화연결
-            }
+//            .phoneCall(model.digit.toPhoneNumber())
     ) {
-        Image(
-            painter = painterResource(id = R.drawable.ic_launcher_background),
-            contentDescription = model.relation,
-            contentScale = ContentScale.Fit,
-            modifier = Modifier
-                .fillMaxSize()
-        )
+        if (model.imagePath.startsWith("drawable/photo_")) {
+            val imageResource = context.resources.getIdentifier(model.imagePath, "drawable", context.packageName)
+            Image(
+                painter = painterResource(imageResource),
+                contentDescription = model.relation,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .fillMaxSize()
+            )
+        } else {
+            AsyncImage(
+                model = model.imagePath.toUri(),
+                contentDescription = model.relation,
+                contentScale = ContentScale.FillBounds,
+                modifier = Modifier
+                    .fillMaxSize(),
+            )
+        }
 
         OutlineText(
             text = model.relation,

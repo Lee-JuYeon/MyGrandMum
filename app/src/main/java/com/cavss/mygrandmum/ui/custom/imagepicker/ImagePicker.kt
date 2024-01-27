@@ -44,7 +44,8 @@ fun Modifier.multiplePhotoPickingFromGallery(
     /** 요청할 권한 **/
     val permissions = arrayOf(
         Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.CALL_PHONE
     )
 
     /** 다중 권한을 요청하는 데 사용되는 런처 **/
@@ -129,7 +130,8 @@ fun Modifier.singlePhotoPickingFromGallery(
     /** 요청할 권한 **/
     val permissions = arrayOf(
         Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
+        Manifest.permission.WRITE_EXTERNAL_STORAGE,
+        Manifest.permission.CALL_PHONE
     )
 
     /** 다중 권한을 요청하는 데 사용되는 런처 **/
