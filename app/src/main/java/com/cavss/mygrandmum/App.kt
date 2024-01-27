@@ -1,12 +1,14 @@
 package com.cavss.mygrandmum
 
 import android.app.Application
+import com.cavss.mygrandmum.db.sharedpreference.EncryptSharedPrefences
 import com.cavss.mygrandmum.util.secure.AESHelper
 import com.cavss.mygrandmum.util.secure.ZygoteInit
 
 class App : Application() {
     init {
         INSTANCE = this
+        SHARED_PREFERENCE = EncryptSharedPrefences()
     }
 
     // 여기다 코드 추가. 다른곳에 할 경우, 스래드 오류발생
@@ -14,10 +16,12 @@ class App : Application() {
         super.onCreate()
         ZygoteInit.warmUpJcaProviders()
         AESHelper.keystoreSetting()
+        SHARED_PREFERENCE.setContext(applicationContext)
     }
 
     companion object {
         lateinit var INSTANCE: App
+        lateinit var SHARED_PREFERENCE: EncryptSharedPrefences
     }
 }
 /*

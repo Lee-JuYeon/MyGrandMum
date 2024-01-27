@@ -32,10 +32,6 @@ class MainActivity : ComponentActivity() {
     )
     override fun onCreate(savedInstanceState: Bundle?) {
         App.INSTANCE
-        val encryptText = AESHelper.encrypt("암호화 할 텍스트".toByteArray(Charsets.UTF_8))
-        val decryptText = String(AESHelper.decrypt(encryptText)!!, Charsets.UTF_8)
-        Log.e("mDebug", "암호화 된 텍스트 : ${encryptText}")
-        Log.e("mDebug", "복호화 된 텍스트 : ${decryptText}")
 
         super.onCreate(savedInstanceState)
         setContent {
