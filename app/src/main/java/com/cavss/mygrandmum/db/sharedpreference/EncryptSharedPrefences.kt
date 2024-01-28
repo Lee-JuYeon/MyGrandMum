@@ -5,11 +5,7 @@ import android.content.SharedPreferences
 import com.cavss.mygrandmum.util.secure.AESHelper
 
 
-class EncryptSharedPrefences {
-    private lateinit var context : Context
-    fun setContext(context : Context){
-        this.context = context
-    }
+class EncryptSharedPrefences(context : Context) {
 
 //    val encryptText = AESHelper.encrypt("암호화 할 텍스트".toByteArray(Charsets.UTF_8))
 //    val decryptText = String(AESHelper.decrypt(encryptText)!!, Charsets.UTF_8)

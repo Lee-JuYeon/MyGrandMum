@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
             val screens = hashMapOf<Screen, @Composable () -> Unit>(
                 Screen.CallBook to { CallBookView(callBookList = callBookList) },
                 Screen.Map to { MapView(navController) },
-                Screen.CardGame to { CardGameView(navController) }
+                Screen.CardGame to { CardGameView() }
             )
             MygrandmumTheme {
                 NaviView(

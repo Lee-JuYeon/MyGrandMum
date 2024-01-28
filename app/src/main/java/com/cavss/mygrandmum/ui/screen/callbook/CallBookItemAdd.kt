@@ -69,7 +69,7 @@ fun CallBookItemAdd (){
             .singlePhotoPickingFromGallery { selectedUri : Uri? ->
                 photoUri = selectedUri
                 // db에 model insert
-                val encryptSharedPrefences = EncryptSharedPrefences()
+//                val encryptSharedPrefences = EncryptSharedPrefences()
 //                encryptSharedPrefences.setContext(context = context)
 //                encryptSharedPrefences.createData("")
             },

@@ -8,7 +8,6 @@ import com.cavss.mygrandmum.util.secure.ZygoteInit
 class App : Application() {
     init {
         INSTANCE = this
-        SHARED_PREFERENCE = EncryptSharedPrefences()
     }
 
     // 여기다 코드 추가. 다른곳에 할 경우, 스래드 오류발생
@@ -16,7 +15,7 @@ class App : Application() {
         super.onCreate()
         ZygoteInit.warmUpJcaProviders()
         AESHelper.keystoreSetting()
-        SHARED_PREFERENCE.setContext(applicationContext)
+        SHARED_PREFERENCE = EncryptSharedPrefences(applicationContext)
     }
 
     companion object {
