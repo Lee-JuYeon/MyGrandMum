@@ -89,6 +89,7 @@ dependencies {
 
     implementation("io.coil-kt:coil-compose:2.4.0") // coil
     implementation("com.google.accompanist:accompanist-permissions:0.28.0") // 권한
+    implementation(platform("androidx.compose:compose-bom:2023.06.01")) // bottom sheet
 
 
 
