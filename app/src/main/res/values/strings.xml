@@ -2,5 +2,5 @@
     <string name="app_name">큰손지</string>
     <string name="nav_title_callbook">전화번호</string>
     <string name="nav_title_cardgame">치매 예방</string>
-    <string name="nav_title_map">위치</string>
+    <string name="nav_title_watcher">눈길</string>
 </resources>

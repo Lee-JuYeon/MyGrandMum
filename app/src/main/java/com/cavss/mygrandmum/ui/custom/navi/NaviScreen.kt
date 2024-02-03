@@ -13,7 +13,7 @@ fun NaviScreen(navController : NavHostController, screens: Map<Screen, @Composab
             composable(screen.type) { view() }
         }
 //        composable(Screen.CallBookView.type) { CallBookView(navController) }
-//        composable(Screen.MapView.type) { MapView(navController) }
+//        composable(Screen.WatcherView.type) { WatcherView(navController) }
 //        composable(Screen.CardGameView.type) { CardGameView(navController) }
     }
 }
