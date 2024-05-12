@@ -39,8 +39,10 @@ import androidx.core.content.ContextCompat.startActivity
 import androidx.core.net.toUri
 import coil.compose.AsyncImage
 import coil.compose.AsyncImagePainter.State.Empty.painter
+import coil.compose.rememberAsyncImagePainter
 import coil.compose.rememberImagePainter
 import com.cavss.mygrandmum.R
+import com.cavss.mygrandmum.ui.custom.imagepicker.singlePhotoPickingFromGallery
 import com.cavss.mygrandmum.ui.custom.outlinetext.OutlineText
 import com.cavss.mygrandmum.ui.custom.permission.phoneCall
 import com.cavss.mygrandmum.util.dialConverter.DialConverter
@@ -59,26 +61,16 @@ fun CallBookItem (model : CallBookModel){
                 Color.Transparent,
                 RoundedCornerShape(CornerSize(10.dp))
             )
-//            .phoneCall(model.digit.toPhoneNumber())
+            .phoneCall(model.digit.toPhoneNumber())
     ) {
-        if (model.imagePath.startsWith("drawable/photo_")) {
-            val imageResource = context.resources.getIdentifier(model.imagePath, "drawable", context.packageName)
-            Image(
-                painter = painterResource(imageResource),
-                contentDescription = model.relation,
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier
-                    .fillMaxSize()
-            )
-        } else {
-            AsyncImage(
-                model = model.imagePath.toUri(),
-                contentDescription = model.relation,
-                contentScale = ContentScale.FillBounds,
-                modifier = Modifier
-                    .fillMaxSize(),
-            )
-        }
+        Image(
+            painter = rememberAsyncImagePainter(model.imagePath),
+            contentDescription = "이미지",
+            contentScale = ContentScale.Fit,
+            modifier = Modifier
+                .fillMaxSize()
+        )
+
 
         OutlineText(
             text = model.relation,

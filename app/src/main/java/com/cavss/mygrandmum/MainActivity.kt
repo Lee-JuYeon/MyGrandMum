@@ -75,6 +75,7 @@ import com.google.accompanist.permissions.rememberPermissionState
 import com.google.mlkit.vision.common.InputImage
 import com.google.mlkit.vision.text.TextRecognition
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
 import java.util.concurrent.Executors
@@ -90,9 +91,9 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             val navController: NavHostController = rememberNavController()
-            val screens = hashMapOf<Screen, @Composable () -> Unit>(
+            val screens = linkedMapOf<Screen, @Composable () -> Unit>(
                 Screen.CallBook to { CallBookView(callBookList = getCallBooks()) },
-                Screen.Watcher to { WatcherView() },
+//                Screen.Watcher to { WatcherView() },
                 Screen.CardGame to { CardGameView() }
             )
             MygrandmumTheme {
@@ -105,32 +106,24 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private val callBookList = mutableListOf<CallBookModel>(
-        CallBookModel(name = "장태옥", relation = "딸", imagePath = "drawable/photo_taeok", digit = "01073723616"),
-        CallBookModel(name = "장리디아", relation = "손녀", imagePath = "drawable/photo_lydia", digit = "01075203616"),
-        CallBookModel(name = "이주연", relation = "손자", imagePath = "drawable/photo_juyeon", digit = "01073077896"),
-        CallBookModel(name = "이우연", relation = "손자", imagePath = "drawable/photo_yooyeon", digit = "01055123616"),
-        CallBookModel(name = "이찬연", relation = "손자", imagePath = "drawable/photo_chanyeon", digit = "01055323616"),
-        CallBookModel(name = "장경수", relation = "손자", imagePath = "drawable/photo_kyoungsu", digit = "01085091418"),
-        CallBookModel(name = "이용빈", relation = "사위", imagePath = "drawable/photo_youngbin", digit = "01047663616")
-    )
+
     private fun getCallBooks() : List<CallBookModel>{
         val mList : MutableList<CallBookModel> = mutableListOf()
-        App.SHARED_PREFERENCE.getAllData().keys // name
-        App.SHARED_PREFERENCE.getAllData().let {
-            callBookList.forEach { model : CallBookModel ->
-                mList.add(model)
-            }
-            it.values.map {  data : Any? -> //data는 callbook model의 json형태.
+        App.SHARED_PREFERENCE.getAllData().observe(this){
+            it.keys // name
+            it.let {
+                it.values.map {  data : Any? -> //data는 callbook model의 json형태.
 
-                val model = data.toString()
-                Log.e("mException", "db 데이버 뽑기 : ${model}")
+                    val model = data.toString()
+                    Log.e("mException", "db 데이버 뽑기 : ${model}")
 
-                val parsedModel = model.toCallBookModel()
-                mList.add(parsedModel)
-                Log.e("mException", "db 파싱데이터 : ${parsedModel}")
+                    val parsedModel : CallBookModel = model.toCallBookModel()
+                    mList.add(parsedModel)
+                    Log.e("mException", "db 파싱데이터 : ${parsedModel}")
+                }
             }
         }
+
         return mList
     }
 }

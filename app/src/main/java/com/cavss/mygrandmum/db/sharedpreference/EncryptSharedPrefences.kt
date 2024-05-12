@@ -2,6 +2,8 @@ package com.cavss.mygrandmum.db.sharedpreference
 
 import android.content.Context
 import android.content.SharedPreferences
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import com.cavss.mygrandmum.util.secure.AESHelper
 
 
@@ -15,6 +17,15 @@ class EncryptSharedPrefences(context : Context) {
     private val preference_name = "facebook"
     private var sharedPreferences = context.getSharedPreferences(preference_name, Context.MODE_PRIVATE)
 
+    private val _allData = MutableLiveData<Map<String, *>>()
+    init {
+        _allData.value = sharedPreferences.all
+        val listener = SharedPreferences.OnSharedPreferenceChangeListener { sharedPreferences, key ->
+            _allData.value = sharedPreferences.all
+        }
+        sharedPreferences.registerOnSharedPreferenceChangeListener(listener)
+    }
+
     fun readData(key : String, value : String) : String?{
         return sharedPreferences.getString(key, value)
     }
@@ -25,9 +36,10 @@ class EncryptSharedPrefences(context : Context) {
         sharedPreferences.edit().remove(key).commit()
     }
 
-    fun getAllData() : Map<String, *>{
-        return sharedPreferences.all
+    fun getAllData(): LiveData<Map<String, *>> {
+        return _allData
     }
+
 
 
 }
